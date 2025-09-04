@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hover Snake Effect</title>
+  <title>Snake Hover Effect</title>
   <style>
     body {
       background-color: rgb(20, 20, 20);
@@ -34,22 +34,18 @@
   <div id="gallery"></div>
 
   <script>
-    /* === SETTINGS === */
-    const displayDistance = 50; // Distance in px before showing next image
-    const nDisplay = 7; // Number of images visible at once
+    // === SETTINGS ===
+    const displayDistance = 50; // distance in px before showing next image
+    const nDisplay = 7; // number of images visible at once
 
-    // 🔹 Replace these with your own hosted image URLs
+    // 🔹 REPLACE THESE WITH YOUR OWN RAW GITHUB IMAGE LINKS
     const imageUrls = [
-  "https://raw.githubusercontent.com/gremlinotes/hover-effect/main/image1.png",
-  "https://raw.githubusercontent.com/gremlinotes/hover-effect/main/image2.png",
-  "https://raw.githubusercontent.com/gremlinotes/hover-effect/main/image3.png"
-  "https://raw.githubusercontent.com/gremlinotes/hover-effect/main/image4.png"
-  "https://raw.githubusercontent.com/gremlinotes/hover-effect/main/image5.png"
-  "https://raw.githubusercontent.com/gremlinotes/hover-effect/main/image6.png"
-    
+      "https://raw.githubusercontent.com/gremlinotes/hover-effect/main/image1.png",
+      "https://raw.githubusercontent.com/gremlinotes/hover-effect/main/image2.png",
+      "https://raw.githubusercontent.com/gremlinotes/hover-effect/main/image3.png"
     ];
 
-    // === CREATE IMAGES DYNAMICALLY ===
+    // === CREATE IMAGES ===
     const gallery = document.getElementById("gallery");
     imageUrls.forEach((url) => {
       const img = document.createElement("img");
