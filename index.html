@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hover Snake Effect</title>
+  <style>
+    body {
+      background-color: rgb(20, 20, 20);
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      min-height: 100vh;
+    }
+
+    .image {
+      width: 40vmin;
+      position: absolute;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .image[data-status="inactive"] {
+      display: none;
+    }
+
+    .image[data-status="active"] {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div id="gallery"></div>
+
+  <script>
+    /* === SETTINGS === */
+    const displayDistance = 50; // Distance in px before showing next image
+    const nDisplay = 7; // Number of images visible at once
+
+    // 🔹 Replace these with your own hosted image URLs
+    const imageUrls = [
+      "https://picsum.photos/600/800?random=1",
+      "https://picsum.photos/600/800?random=2",
+      "https://picsum.photos/600/800?random=3",
+      "https://picsum.photos/600/800?random=4",
+      "https://picsum.photos/600/800?random=5",
+      "https://picsum.photos/600/800?random=6",
+      "https://picsum.photos/600/800?random=7"
+    ];
+
+    // === CREATE IMAGES DYNAMICALLY ===
+    const gallery = document.getElementById("gallery");
+    imageUrls.forEach((url) => {
+      const img = document.createElement("img");
+      img.src = url;
+      img.classList.add("image");
+      img.dataset.status = "inactive";
+      gallery.appendChild(img);
+    });
+
+    const images = document.getElementsByClassName("image");
+    let globalIndex = 0;
+    let lastMousePosition = { x: 0, y: 0 };
+
+    function activatePic(img, x, y) {
+      img.dataset.status = "active";
+      img.style.left = `${x}px`;
+      img.style.top = `${y}px`;
+      img.style.zIndex = globalIndex;
+      lastMousePosition = { x: x, y: y };
+    }
+
+    function mouseDistance(x, y) {
+      return Math.hypot(x - lastMousePosition.x, y - lastMousePosition.y);
+    }
+
+    window.onmousemove = (e) => {
+      if (mouseDistance(e.clientX, e.clientY) > displayDistance) {
+        let activePic = images[globalIndex % images.length];
+        let inactivePic = images[(globalIndex - nDisplay) % images.length];
+
+        activatePic(activePic, e.clientX, e.clientY);
+        if (inactivePic) inactivePic.dataset.status = "inactive";
+
+        globalIndex++;
+      }
+    };
+  </script>
+</body>
+</html>
